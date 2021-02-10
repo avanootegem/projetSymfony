@@ -10,3 +10,12 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+import Vue from 'vue'
+
+new Vue ({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+})
