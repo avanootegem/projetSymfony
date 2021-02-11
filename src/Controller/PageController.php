@@ -12,11 +12,8 @@ class PageController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(CallApiService $api) : Response
-    { 
-      $value = $api->get20CryptoData();
-      $data = $value['data'];
-
-      return new Response($this->renderView('pages/home.html.twig', ["data" => $data]));
+    public function index() : Response
+    {
+      return new Response($this->renderView('pages/home.html.twig'));
     }
 }
