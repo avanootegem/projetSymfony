@@ -1,1 +1,24 @@
-{% extends "./base.html.twig" %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th> Id </th>
+                <th> Name </th>
+                <th> Symbol </th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <td> {{data.id}} </td>
+                <td> {{data.name}} </td>
+                <td> <a href="{{ path('crypto', {id: data.id}) }}">  {{data.symbol}} </a> </td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
