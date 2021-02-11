@@ -13,6 +13,6 @@ class PageController extends AbstractController
      */
     public function index() : Response
     {
-        return new Response($this->renderView('pages/home.html.twig'));
+      return new Response($this->renderView('pages/home.html.twig'));
     }
 }
