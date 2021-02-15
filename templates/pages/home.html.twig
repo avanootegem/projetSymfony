@@ -1,1 +1,23 @@
-{% extends "./base.html.twig" %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Symbol </th>
+                <th> Price </th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <td> <a href="{{ path('crypto', {currency: currency, symbol: data.symbol}) }}"> {{data.name}} </a></td>
+                <td> {{data.symbol}} </td>
+                <td> {{ data.quote[currency].price }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
