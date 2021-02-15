@@ -11,15 +11,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends AbstractController
 { 
     /**
-     * @Route("/{currency}", name="home")
+     * @Route("/{currency}_json", name="home_json")
      */
-    public function index(CallApiService $api, $currency = "EUR") : JsonResponse
+    public function home_json(CallApiService $api, $currency = "EUR") : Response
     { 
       $value = $api->get100CryptoData($currency);
 
       dump($value);
 
-      return new JsonResponse($value);
+      return new Response($value);
+    }
+
+    /**
+     * @Route("/{currency}", name="home")
+     */
+    public function home() : Response
+    { 
+      return new Response($this->renderView('pages/home.html.twig'));
     }
 
     /**
