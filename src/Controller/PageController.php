@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
-{
+{ 
     /**
      * @Route("/{currency}", name="home")
      */
-    public function index(CallApiService $api, $currency) : Response
+    public function index(CallApiService $api, $currency = "EUR") : Response
     { 
       $value = $api->get100CryptoData($currency);
       $data = $value['data'];

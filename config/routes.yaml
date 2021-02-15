@@ -1,3 +1,10 @@
+test:
+  path: "/"
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  defaults: 
+    route: home
+    premanent: true
+    keepQueryParams: true
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
