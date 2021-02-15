@@ -4,19 +4,18 @@
     <table>
         <thead>
             <tr>
-                <th> Id </th>
                 <th> Name </th>
                 <th> Symbol </th>
+                <th> Price </th>
             </tr>
         </thead>
 
         <tbody>
         {% for data in datas %}
             <tr>
-                <td> {{data.id}} </td>
-                <td> {{data.name}} </td>
-                <td> <a href="{{ path('crypto', {id: data.id}) }}">  {{data.symbol}} </a> </td>
-                
+                <td> <a href="{{ path('crypto', {currency: currency, symbol: data.symbol}) }}"> {{data.name}} </a></td>
+                <td> {{data.symbol}} </td>
+                <td> {{ data.quote[currency].price }} </td>
             </tr>
         {% endfor %}
         </tbody>

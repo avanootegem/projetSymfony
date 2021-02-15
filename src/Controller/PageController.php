@@ -10,24 +10,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{currency}", name="home")
      */
-    public function index(CallApiService $api) : Response
+    public function index(CallApiService $api, $currency) : Response
     { 
-      $value = $api->get20CryptoData();
+      $value = $api->get100CryptoData($currency);
       $data = $value['data'];
 
       dump($value);
 
-      return new Response($this->renderView('pages/home.html.twig', ["datas" => $data]));
+      return new Response($this->renderView('pages/home.html.twig', 
+        [
+          "datas" => $data,
+          "currency" => $currency
+        ]
+      ));
     }
 
     /**
-     * @Route("/crypto/{id}", name="crypto")
+     * @Route("/crypto/{symbol}_{currency}", name="crypto")
      */
-    public function crypto(CallApiService $api, $id) : Response
+    public function crypto(CallApiService $api, $symbol, $currency) : Response
     {
-      $value = $api->getSpcificCrypto($id);
+      $value = $api->getSpcificCrypto($symbol, $currency);
       $data = $value['data'];
 
       dump($data);

@@ -11,21 +11,21 @@ class CallApiService
         $this->client = $client;
     }
 
-    public function get20CryptoData() : array
+    public function get100CryptoData($currency) : array
     {
         $response = $this->client->request(
             'GET',
-            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=EUR&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert='.$currency.'&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
         );
 
         return $response->toArray();
     }
 
-    public function getSpcificCrypto($id) : array
+    public function getSpcificCrypto($symbol, $currency) : array
     {
         $response = $this->client->request(
             'GET',
-            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id='.$id.'&convert=EUR&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol='.$symbol.'&convert='.$currency.'&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
         );
 
         return $response->toArray();
