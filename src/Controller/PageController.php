@@ -4,42 +4,48 @@ namespace App\Controller;
 
 use App\Service\CallApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
-{ 
-    /**
-     * @Route("/{currency}_json", name="home_json")
-     */
-    public function home_json(CallApiService $api, $currency = "EUR") : Response
-    { 
-      $value = $api->get100CryptoData($currency);
+{
+  /**
+   * @Route("/{currency}_json", name="home_json")
+   */
+  public function home_json(CallApiService $api, $currency): Response
+  {
+    $value = $api->get100CryptoData($currency);
+    return new Response($value);
+  }
 
-      dump($value);
+  /**
+   * @Route("/{currency}", name="home")
+   */
+  public function home($currency = "EUR"): Response
+  {
+    return new Response($this->renderView('pages/home.html.twig', ["currency" => $currency]));
+  }
 
-      return new Response($value);
-    }
+  /**
+   * @Route("/crypto/{symbol}_{currency}_json", name="crypto_json")
+   */
+  public function crypto_json(CallApiService $api, $symbol, $currency): Response
+  {
+    $value = $api->getSpcificCrypto($symbol, $currency);
 
-    /**
-     * @Route("/{currency}", name="home")
-     */
-    public function home() : Response
-    { 
-      return new Response($this->renderView('pages/home.html.twig'));
-    }
+    return new Response($value);
+  }
 
-    /**
-     * @Route("/crypto/{symbol}_{currency}", name="crypto")
-     */
-    public function crypto(CallApiService $api, $symbol, $currency) : Response
-    {
-      $value = $api->getSpcificCrypto($symbol, $currency);
-      $data = $value['data'];
-
-      dump($data);
-
-      return new Response($this->renderView('pages/crypto.html.twig', ["datas" => $data]));
-    }
+  /**
+   * @Route("/crypto/{symbol}_{currency}", name="crypto")
+   */
+  public function crypto($symbol, $currency): Response
+  {
+    return new Response($this->renderView('pages/crypto.html.twig',
+    [
+      "currency" => $currency,
+      "symbol" => $symbol
+    ]
+  ));
+  }
 }

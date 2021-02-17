@@ -1,8 +1,7 @@
-{% extends "base.html.twig "%}
+{% extends "base.html.twig" %}
 
 {% block body %}
-    <h1> Page Crypto </h1>
-    {% for data in datas %}
-        {{ data.id }} {{data.name}} {{data.symbol}}
-    {% endfor %}
+	<div class="container">
+		<div id="crypt" currency={{ currency }} symbol={{ symbol }}></div>
+	</div>
 {% endblock %}

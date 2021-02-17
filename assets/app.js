@@ -12,13 +12,28 @@ import './styles/app.css';
 import './bootstrap';
 
 import Vue from 'vue'
-import App from "./App.vue"
+import Home from "./Home.vue"
+import Crypt from "./Crypt.vue"
 
-new Vue ({
-    el: '#app',
-    components:
-    {
-        App    
+new Vue({
+    render(h) {
+        return h(Home, {
+            props: {
+                currency: this.$el.getAttribute('currency'),
+            },
+        })
     },
-    template: "<App/>"
-})
+    template: "<Home/>"
+}).$mount('#home')
+
+new Vue({
+    render(h) {
+        return h(Crypt, {
+            props: {
+                currency: this.$el.getAttribute('currency'),
+                symbol: this.$el.getAttribute('symbol'),
+            },
+        })
+    },
+    template: "<Crypt/>"
+}).$mount('#crypt')
