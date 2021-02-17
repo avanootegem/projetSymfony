@@ -12,15 +12,27 @@ import './styles/app.css';
 import './bootstrap';
 
 import Vue from 'vue'
+import Titre from './Titre.vue'
 import App from "./App.vue"
-Vue.filter('formatEUR',function(euro){
+Vue.filter('formatFR',function(euro){
     return new Intl.NumberFormat('fr-FR').format(euro);
+  })
+Vue.filter('formatUS',function(us){
+    return new Intl.NumberFormat('us-US').format(us);
   })
 new Vue ({
     el: '#app',
     components:
-    {
+    {   
         App    
     },
     template: "<App/>"
+})
+new Vue ({
+    el: '#titre',
+    components:
+    {   
+        Titre   
+    },
+    template: "<Titre/>"
 })
