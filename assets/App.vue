@@ -1,35 +1,34 @@
 <template>
-
-    <table class="table table-bordered table-dark">
-      <thead>
-        <tr>
-          <th scope="col">Nom</th>
-          <th scope="col">Symbole</th>
-          <th scope="col">Prix</th>
-          <th scope="col">Market cap</th>
-          <th scope="col">Volume</th>
-          <th scope="col">%1h</th>
-          <th scope="col">%24h</th>
-          <th scope="col">%7j</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="crypto in cryptos" v-bind:key="crypto.id">
-          <td>{{ crypto.name }}</td>
-          <td>{{ crypto.symbol }}</td>
-          <td>{{ crypto.quote.EUR.price }}€</td>
-          <td>{{ crypto.quote.EUR.market_cap }}</td>
-          <td>{{ crypto.quote.EUR.volume_24h }}</td>
-          <td>{{ crypto.quote.EUR.percent_change_1h }}</td>
-          <td>{{ crypto.quote.EUR.percent_change_24h }}</td>
-          <td>{{ crypto.quote.EUR.percent_change_7d }}</td>
-        </tr>
-      </tbody>
-    </table>
-
+  <table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Symbole</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Market cap</th>
+        <th scope="col">Volume</th>
+        <th scope="col">%1h</th>
+        <th scope="col">%24h</th>
+        <th scope="col">%7j</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="crypto in cryptos" v-bind:key="crypto.id">
+        <td>{{ crypto.name }}</td>
+        <td>{{ crypto.symbol }}</td>
+        <td>{{ crypto.quote.EUR.price.toPrecision(5) | formatEUR}}€</td>
+        <td>{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatEUR }}</td>
+        <td>{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatEUR }}</td>
+        <td>{{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatEUR }}</td>
+        <td>{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatEUR}}</td>
+        <td>{{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatEUR}}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
+
 export default {
   name: "App",
   data() {
@@ -58,6 +57,12 @@ export default {
         });
     },
   },
+  /*
+  filters:{
+       convertEUR: function(euro) {
+      let euro = new Intl.NumberFormat("fr-FR").format();
+    },
+  },*/
   created() {
     this.fetchCryptos();
   },
@@ -68,7 +73,7 @@ export default {
 </script>
 
 <style>
-body{
-    background-color: rgb(50, 50, 50) !important;
-    }
+body {
+  background-color: rgb(50, 50, 50) !important;
+}
 </style>
