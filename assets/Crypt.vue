@@ -2,12 +2,12 @@
 	<div>
 		<p v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
 		<p v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
-		<p v-if="currency == 'EUR'">Prix : {{ crypto.quote.EUR.price.toPrecision(5) }}</p>
-		<p v-if="currency == 'EUR'">Volume 24h : {{ crypto.quote.EUR.market_cap.toPrecision(12) }}</p>
-
-    		<p v-if="currency == 'EUR'">1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) }}</p>
-		<p v-if="currency == 'EUR'">24h : {{ crypto.quote.EUR.percent_change_24h.toPrecision(3) }}</p>
-		<p v-if="currency == 'EUR'">7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) }}</p>
+		<p v-if="currency == 'EUR'">Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} € </p>
+		<p v-if="currency == 'EUR'">Market cap : {{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €</p>
+    <p v-if="currency == 'EUR'">Volume 24h : {{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €</p>
+    <p v-if="currency == 'EUR'">1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %</p>
+		<p v-if="currency == 'EUR'">24h : {{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %</p>
+		<p v-if="currency == 'EUR'">7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %</p>
 	</div>
 
 	<!-- <table class="table table-bordered table-dark">
