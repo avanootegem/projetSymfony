@@ -1,4 +1,5 @@
 <template>
+<div class="table-responsive-sm">
   <table class="table table-bordered table-dark">
     <thead>
       <tr>
@@ -18,11 +19,11 @@
         <td><a v-bind:href="'/crypto/' + crypto.name + '_' + currency">{{ crypto.name }}</a></td>
         <td>{{ crypto.symbol }}</td>
         <td>{{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} €</td>
-        <td>{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }}</td>
-        <td>{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }}</td>
-        <td>{{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }}</td>
-        <td>{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }}</td>
-        <td>{{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }}</td>
+        <td>{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €</td>
+        <td>{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.EUR.percent_change_1h)">{{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.EUR.percent_change_24h)">{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.EUR.percent_change_7d)">{{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %</td>
       </tr>
     </tbody>
 
@@ -31,11 +32,11 @@
         <td><a v-bind:href="'/crypto/' + crypto.name + '_' + currency">{{ crypto.name }}</a></td>
         <td>{{ crypto.symbol }} </td>
         <td>{{ crypto.quote.GBP.price.toPrecision(5) | formatUS }} £</td>
-        <td>{{ crypto.quote.GBP.market_cap.toPrecision(12) | formatUS }}</td>
-        <td>{{ crypto.quote.GBP.volume_24h.toPrecision(12) | formatUS }}</td>
-        <td>{{ crypto.quote.GBP.percent_change_1h.toPrecision(3) | formatUS }}</td>
-        <td>{{ crypto.quote.GBP.percent_change_24h.toPrecision(3) | formatUS }}</td>
-        <td>{{ crypto.quote.GBP.percent_change_7d.toPrecision(3) | formatUS }}</td>
+        <td>{{ crypto.quote.GBP.market_cap.toPrecision(12) | formatUS }} £</td>
+        <td>{{ crypto.quote.GBP.volume_24h.toPrecision(12) | formatUS }} £</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.GBP.percent_change_1h)">{{ crypto.quote.GBP.percent_change_1h.toPrecision(3) | formatUS }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.GBP.percent_change_24h)">{{ crypto.quote.GBP.percent_change_24h.toPrecision(3) | formatUS }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.GBP.percent_change_7d)">{{ crypto.quote.GBP.percent_change_7d.toPrecision(3) | formatUS }} %</td>
       </tr>
     </tbody>
 
@@ -44,14 +45,15 @@
         <td><a v-bind:href="'/crypto/' + crypto.name + '_' + currency">{{ crypto.name }}</a></td>
         <td>{{ crypto.symbol }}</td>
         <td>{{ crypto.quote.USD.price.toPrecision(5) | formatUS }} $</td>
-        <td>{{ crypto.quote.USD.market_cap.toPrecision(12) | formatUS }}</td>
-        <td>{{ crypto.quote.USD.volume_24h.toPrecision(12) | formatUS }}</td>
-        <td>{{ crypto.quote.USD.percent_change_1h.toPrecision(3) | formatUS }}</td>
-        <td>{{ crypto.quote.USD.percent_change_24h.toPrecision(3) | formatUS }}</td>
-        <td>{{ crypto.quote.USD.percent_change_7d.toPrecision(3) | formatUS }}</td>
+        <td>{{ crypto.quote.USD.market_cap.toPrecision(12) | formatUS }} $</td>
+        <td>{{ crypto.quote.USD.volume_24h.toPrecision(12) | formatUS }} $</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.USD.percent_change_1h)">{{ crypto.quote.USD.percent_change_1h.toPrecision(3) | formatUS }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.USD.percent_change_24h)">{{ crypto.quote.USD.percent_change_24h.toPrecision(3) | formatUS }} %</td>
+        <td v-bind:class="negativeOrPositive(crypto.quote.USD.percent_change_7d)">{{ crypto.quote.USD.percent_change_7d.toPrecision(3) | formatUS }} %</td>
       </tr>
     </tbody>
   </table>
+  </div>
 </template>
 
 <script>
@@ -60,7 +62,9 @@ export default {
   props: ["currency"],
   data() {
     return {
-      message: "un message",
+    positiveNumber :'positive',
+    negativeNumber :'negative',
+    message: "un message",
       cryptos: [],
       crypto: {
         id: "",
@@ -70,6 +74,14 @@ export default {
     };
   },
   methods: {
+    negativeOrPositive(x){
+      if (x >=0) {
+        return this.positiveNumber
+      }
+      else{
+        return this.negativeNumber
+      }
+    },
     fetchCryptos() {
       fetch("/" + this.currency + "_json")
         .then((res) => res.json())
@@ -82,6 +94,9 @@ export default {
   created() {
     this.fetchCryptos();
   },
+  mounted(){
+    this.negativeOrPositive();
+  }
 };
 </script>
 
@@ -94,6 +109,20 @@ th {
 td {
   font-family: "Montserrat", sans-serif;
 }
+
+tr{
+  transition: 0.3s;
+}
+tr:hover{
+  box-shadow: 0px 0px 10px 10px royalblue;
+}
+.positive{
+  color: rgb(20, 230, 20) !important;
+}
+.negative{
+  color: rgb(221, 25, 25) !important;
+}
+
 body {
   background-color: rgb(50, 50, 50) !important;
 }
