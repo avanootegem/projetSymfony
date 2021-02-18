@@ -1,5 +1,15 @@
 <template>
-	<p v-if="currency == 'EUR'">Nom : {{ symbol }}</p>
+	<div>
+		<p v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
+		<p v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
+		<p v-if="currency == 'EUR'">Prix : {{ crypto.quote.EUR.price.toPrecision(5) }}</p>
+		<p v-if="currency == 'EUR'">Volume 24h : {{ crypto.quote.EUR.market_cap.toPrecision(12) }}</p>
+
+    		<p v-if="currency == 'EUR'">1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) }}</p>
+		<p v-if="currency == 'EUR'">24h : {{ crypto.quote.EUR.percent_change_24h.toPrecision(3) }}</p>
+		<p v-if="currency == 'EUR'">7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) }}</p>
+	</div>
+
 	<!-- <table class="table table-bordered table-dark">
     <thead>
       <tr>
@@ -62,30 +72,34 @@ export default {
 	data() {
 		return {
 			message: 'un message',
-			cryptos: [],
+			cryptos: '',
+			crypto: '',
 		};
 	},
 	methods: {
-		fetchCryptos() {
+		fetchCryptoName() {
 			fetch('/crypto/' + this.symbol + '_' + this.currency + '_json')
 				.then((res) => res.json())
 				.then((res) => {
 					console.log(res.data);
 					this.cryptos = res.data;
+					var monObjet = this.cryptos;
+					var monTableau = Object.keys(monObjet).map(function(cle) {
+						return [String(cle), monObjet[cle]];
+					});
+					this.crypto = monTableau[0][1];
 				});
 		},
 	},
 	created() {
-		this.fetchCryptos();
+		this.fetchCryptoName();
 	},
 };
 </script>
 
 <style>
-@font-face {
-	font-family: 'haetten';
-	src: url(fonts/haetten.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
 body {
 	background-color: rgb(50, 50, 50) !important;
@@ -94,6 +108,6 @@ body {
 p {
 	color: rgb(9, 255, 173);
 	font-size: calc(40px + (50 - 40) * ((100vw - 300px) / (1600 - 300)));
-	font-family: 'haetten', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 </style>
