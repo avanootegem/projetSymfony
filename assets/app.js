@@ -22,7 +22,6 @@ Vue.filter('formatFR', function (euro) {
 Vue.filter('formatUS', function (us) {
     return new Intl.NumberFormat('us-US').format(us);
 })
-
 new Vue({
     el: '#titre',
     components:

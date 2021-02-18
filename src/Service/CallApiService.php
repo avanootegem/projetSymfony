@@ -15,7 +15,7 @@ class CallApiService
     {
         $response = $this->client->request(
             'GET',
-            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5&convert=' . $currency . '&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=' . $currency . '&CMC_PRO_API_KEY=6ab675c5-fc5e-4796-8bb7-4fca13f262fa'
         );
 
         return $response->getContent();
@@ -25,7 +25,7 @@ class CallApiService
     {
         $response = $this->client->request(
             'GET',
-            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' . $symbol . '&convert=' . $currency . '&CMC_PRO_API_KEY=111f3536-380c-4e85-8d58-2bf67b21b2e7'
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' . $symbol . '&convert=' . $currency . '&CMC_PRO_API_KEY=6ab675c5-fc5e-4796-8bb7-4fca13f262fa'
         );
 
         return $response->getContent();
