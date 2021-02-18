@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center fs-title">Top 100 cryptos</h1>
+    <h2 class="text-center fs-crypto">Bitcoin</h2>
 </template>
 <script>
 export default {
@@ -12,7 +12,7 @@ export default {
     font-family: "haetten";
     src: url(fonts/haetten.ttf);
 }
-h1{
+h2{
   color: white;
   font-family: "haetten", sans-serif;
 }
@@ -21,7 +21,8 @@ h1{
   text-align: center;
 }
 
-.fs-title{
-  font-size: 8vw;
+.fs-crypto{
+  font-size: 6vh;
 }
+
 </style>

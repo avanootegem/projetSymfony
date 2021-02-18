@@ -15,6 +15,7 @@ import Vue from 'vue'
 import Home from "./Home.vue"
 import Crypt from "./Crypt.vue"
 import Titre from './Titre.vue'
+import Titre_crypto from './Titre_crypto.vue'
 
 Vue.filter('formatFR', function (euro) {
     return new Intl.NumberFormat('fr-FR').format(euro);
@@ -31,6 +32,18 @@ new Vue({
     },
     template: "<Titre/>"
 })
+
+new Vue({
+    render(h) {
+        return h(Titre_crypto, {
+            props: {
+                currency: this.$el.getAttribute('currency'),
+                symbol: this.$el.getAttribute('symbol'),
+            },
+        })
+    },
+    template: "<Titre_crypto/>"
+}).$mount('#titre_crypto')
 
 new Vue({
     render(h) {

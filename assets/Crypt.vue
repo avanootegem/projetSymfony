@@ -84,4 +84,5 @@ export default {
 body {
   background-color: rgb(50, 50, 50) !important;
 }
+
 </style>
