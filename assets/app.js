@@ -37,8 +37,8 @@ new Vue({
     render(h) {
         return h(Titre_crypto, {
             props: {
-                currency: this.$el.getAttribute('currency'),
                 symbol: this.$el.getAttribute('symbol'),
+                currency: this.$el.getAttribute('currency'),
             },
         })
     },

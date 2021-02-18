@@ -1,5 +1,6 @@
 <template>
-  <table class="table table-bordered table-dark">
+	<p v-if="currency == 'EUR'">Nom : {{ symbol }}</p>
+	<!-- <table class="table table-bordered table-dark">
     <thead>
       <tr>
         <th scope="col">Nom</th>
@@ -51,38 +52,48 @@
         <td>{{ crypto.quote.USD.percent_change_7d.toPrecision(3) | formatUS }}</td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
 </template>
 
 <script>
 export default {
-  name: "Crypt",
-  props: ["currency", "symbol"],
-  data() {
-    return {
-      message: "un message",
-      cryptos: [],
-    };
-  },
-  methods: {
-    fetchCryptos() {
-      fetch("/crypto/" + this.symbol + "_" + this.currency + "_json")
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res.data);
-          this.cryptos = res.data;
-        });
-    },
-  },
-  created() {
-    this.fetchCryptos();
-  },
+	name: 'Crypt',
+	props: ['currency', 'symbol'],
+	data() {
+		return {
+			message: 'un message',
+			cryptos: [],
+		};
+	},
+	methods: {
+		fetchCryptos() {
+			fetch('/crypto/' + this.symbol + '_' + this.currency + '_json')
+				.then((res) => res.json())
+				.then((res) => {
+					console.log(res.data);
+					this.cryptos = res.data;
+				});
+		},
+	},
+	created() {
+		this.fetchCryptos();
+	},
 };
 </script>
 
 <style>
-body {
-  background-color: rgb(50, 50, 50) !important;
+@font-face {
+	font-family: 'haetten';
+	src: url(fonts/haetten.ttf);
 }
 
+body {
+	background-color: rgb(50, 50, 50) !important;
+}
+
+p {
+	color: rgb(9, 255, 173);
+	font-size: calc(40px + (50 - 40) * ((100vw - 300px) / (1600 - 300)));
+	font-family: 'haetten', sans-serif;
+}
 </style>
