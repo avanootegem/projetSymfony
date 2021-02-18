@@ -39,7 +39,7 @@ class PageController extends AbstractController
   /**
    * @Route("/crypto/{symbol}_{currency}", name="crypto")
    */
-  public function crypto($symbol, $currency='EUR'): Response
+  public function crypto($symbol = "BTC", $currency = "EUR"): Response
   {
     return new Response($this->renderView('pages/crypto.html.twig',
     [
