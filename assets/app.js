@@ -12,27 +12,46 @@ import './styles/app.css';
 import './bootstrap';
 
 import Vue from 'vue'
+import Home from "./Home.vue"
+import Crypt from "./Crypt.vue"
 import Titre from './Titre.vue'
-import App from "./App.vue"
-Vue.filter('formatFR',function(euro){
+
+Vue.filter('formatFR', function (euro) {
     return new Intl.NumberFormat('fr-FR').format(euro);
-  })
-Vue.filter('formatUS',function(us){
-    return new Intl.NumberFormat('us-US').format(us);
-  })
-new Vue ({
-    el: '#app',
-    components:
-    {   
-        App    
-    },
-    template: "<App/>"
 })
-new Vue ({
+Vue.filter('formatUS', function (us) {
+    return new Intl.NumberFormat('us-US').format(us);
+})
+
+new Vue({
     el: '#titre',
     components:
-    {   
-        Titre   
+    {
+        Titre
     },
     template: "<Titre/>"
 })
+
+new Vue({
+    render(h) {
+        return h(Home, {
+            props: {
+                currency: this.$el.getAttribute('currency'),
+            },
+        })
+    },
+    template: "<Home/>"
+}).$mount('#home')
+
+new Vue({
+    render(h) {
+        return h(Crypt, {
+            props: {
+                currency: this.$el.getAttribute('currency'),
+                symbol: this.$el.getAttribute('symbol'),
+            },
+        })
+    },
+    template: "<Crypt/>"
+}).$mount('#crypt')
+

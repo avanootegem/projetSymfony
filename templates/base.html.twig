@@ -14,13 +14,7 @@
     <body>
         {% block body %}
         {% endblock %}
-
-        {% verbatim %}
-            <div id="app">
-            </div>
-        {% endverbatim %}
         
-
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
