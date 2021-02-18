@@ -14,6 +14,23 @@ import './bootstrap';
 import Vue from 'vue'
 import Home from "./Home.vue"
 import Crypt from "./Crypt.vue"
+import Titre from './Titre.vue'
+
+Vue.filter('formatFR', function (euro) {
+    return new Intl.NumberFormat('fr-FR').format(euro);
+})
+Vue.filter('formatUS', function (us) {
+    return new Intl.NumberFormat('us-US').format(us);
+})
+
+new Vue({
+    el: '#titre',
+    components:
+    {
+        Titre
+    },
+    template: "<Titre/>"
+})
 
 new Vue({
     render(h) {
@@ -37,3 +54,4 @@ new Vue({
     },
     template: "<Crypt/>"
 }).$mount('#crypt')
+
