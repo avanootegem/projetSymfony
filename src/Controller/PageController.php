@@ -25,7 +25,10 @@ class PageController extends AbstractController
   {
     return new Response($this->renderView(
       'pages/home.html.twig',
-      ["currency" => $currency]
+      [
+        "currency" => $currency,
+        "currencySymbol" => $this->currencySymbol($currency)
+      ]
     ));
   }
 
@@ -51,5 +54,23 @@ class PageController extends AbstractController
         "symbol" => $symbol
       ]
     ));
+  }
+
+  private function currencySymbol($currency): string
+  {
+    switch ($currency) {
+      case 'USD':
+        $currencySymbol = "$";
+        break;
+
+      case 'GBP':
+        $currencySymbol = "£";
+        break;
+
+      default:
+        $currencySymbol = "€";
+        break;
+    }
+    return $currencySymbol;
   }
 }
