@@ -73,7 +73,8 @@ class PageController extends AbstractController
     }
     return $currencySymbol;
   }
-    /**
+    
+  /**
    * @Route("/description/{symbol}_json", name="description")
    */
   public function description(CallApiService $api, $symbol='BTC'): Response

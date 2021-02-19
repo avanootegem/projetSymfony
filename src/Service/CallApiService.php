@@ -16,7 +16,7 @@ class CallApiService
     {
         $response = $this->client->request(
             'GET',
-            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5&convert=' . $currency . '&CMC_PRO_API_KEY='.$this->key
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=' . $currency . '&CMC_PRO_API_KEY='.$this->key
         );
 
         return $response->getContent();
