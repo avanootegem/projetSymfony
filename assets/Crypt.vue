@@ -34,10 +34,43 @@
     </p>
     <h3>Liens utiles</h3>
     <ul>
-      <li>{{ description.urls.website[0] }}</li>
-      <li>{{ description.urls.twitter[0] }}</li>
-      <li>{{ description.urls.reddit[0] }}</li>
-      <li>{{ description.urls.technical_doc[0] }}</li>
+      <li>
+        <a :href="description.urls.website[0]">{{
+          description.urls.website[0]
+        }}</a>
+      </li>
+      <li>
+        <a :href="description.urls.twitter[0]">{{
+          description.urls.twitter[0]
+        }}</a>
+      </li>
+      <li>
+        <a :href="description.urls.reddit[0]">{{
+          description.urls.reddit[0]
+        }}</a>
+      </li>
+      <li>
+        <a :href="description.urls.technical_doc[0]">{{
+          description.urls.technical_doc[0]
+        }}</a>
+      </li>
+      <li>
+        <a :href="description.urls.source_code[0]">{{
+          description.urls.source_code[0]
+        }}</a>
+      </li>
+      <li>
+        <a :href="description.urls.chat[0]">{{ description.urls.chat[0] }}</a>
+      </li>
+    </ul>
+    <ul >
+      <li v-for="explorer in description.urls.explorer" v-bind:key="explorer.id">
+        <a :href="explorer">{{ explorer }}</a>
+      </li>
+    </ul>
+    <h3>Tags</h3>
+    <ul >
+      <li class="tags" v-for="tag in tags" :key="tag.id"> {{ tag}} </li>
     </ul>
   </div>
 </template>
@@ -80,6 +113,12 @@ export default {
           });
           this.description = monTableau[0][1];
           console.log(this.description);
+
+          let monObjet2 = this.description;
+          let monTableau2 = Object.keys(monObjet2).map(function (cle) {
+            return [String(cle), monObjet2[cle]];
+          });
+          this.tags = monTableau2[10][1];
         });
     },
   },
@@ -114,7 +153,7 @@ h2 {
 }
 h3 {
   font-size: calc(30px + (50 - 30) * ((100vw - 300px) / (1600 - 300)));
-  color:white
+  color: white;
 }
 p {
   text-justify: auto;
@@ -127,5 +166,8 @@ li {
   font-size: calc(12px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
   color: white;
   list-style: none;
+}
+li.tags {
+  list-style-type: "▶";
 }
 </style>
