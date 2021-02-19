@@ -36,6 +36,7 @@ new Vue({
         return h(Home, {
             props: {
                 currency: this.$el.getAttribute('currency'),
+                currencySymbol : this.$el.getAttribute('currencySymbol')
             },
         })
     },
