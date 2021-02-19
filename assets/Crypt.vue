@@ -1,28 +1,32 @@
 <template>
 	<div>
-		<p class="green" v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
-		<p class="green" v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
-		<p class="green" v-if="currency == 'EUR'">
-			Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} €
-		</p>
-		<p class="green" v-if="currency == 'EUR'">
-			Market cap :
-			{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €
-		</p>
-		<p class="green" v-if="currency == 'EUR'">
-			Volume 24h :
-			{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €
-		</p>
-		<p class="green" v-if="currency == 'EUR'">
-			1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %
-		</p>
-		<p class="green" v-if="currency == 'EUR'">
-			24h :
-			{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %
-		</p>
-		<p class="green" v-if="currency == 'EUR'">
-			7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %
-		</p>
+		<div class="text-center">
+			<p class="green" v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
+			<p class="green" v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
+			<p class="green" v-if="currency == 'EUR'">
+				Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} €
+			</p>
+			<p class="green" v-if="currency == 'EUR'">
+				Market cap :
+				{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €
+			</p>
+			<p class="green" v-if="currency == 'EUR'">
+				Volume 24h :
+				{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €
+			</p>
+			<p class="green" v-if="currency == 'EUR'">
+				1h :
+				{{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %
+			</p>
+			<p class="green" v-if="currency == 'EUR'">
+				24h :
+				{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %
+			</p>
+			<p class="green" v-if="currency == 'EUR'">
+				7d :
+				{{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %
+			</p>
+		</div>
 
 		<h2 class="mt-1 fs-h2">A propos :</h2>
 		<p>
@@ -145,10 +149,13 @@ body {
 }
 
 h2 {
-  	color: white;
+	color: white;
 }
 
 p {
-  
+	text-justify: auto;
+	color: white;
+	font-size: calc(12px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
+	font-family: 'Montserrat', sans-serif;
 }
 </style>
