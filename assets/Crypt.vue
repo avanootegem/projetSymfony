@@ -1,13 +1,41 @@
 <template>
 	<div>
-		<p v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
-		<p v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
-		<p v-if="currency == 'EUR'">Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} € </p>
-		<p v-if="currency == 'EUR'">Market cap : {{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €</p>
-    <p v-if="currency == 'EUR'">Volume 24h : {{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €</p>
-    <p v-if="currency == 'EUR'">1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %</p>
-		<p v-if="currency == 'EUR'">24h : {{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %</p>
-		<p v-if="currency == 'EUR'">7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %</p>
+		<p class="green" v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
+		<p class="green" v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
+		<p class="green" v-if="currency == 'EUR'">
+			Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} €
+		</p>
+		<p class="green" v-if="currency == 'EUR'">
+			Market cap :
+			{{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €
+		</p>
+		<p class="green" v-if="currency == 'EUR'">
+			Volume 24h :
+			{{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €
+		</p>
+		<p class="green" v-if="currency == 'EUR'">
+			1h : {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %
+		</p>
+		<p class="green" v-if="currency == 'EUR'">
+			24h :
+			{{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %
+		</p>
+		<p class="green" v-if="currency == 'EUR'">
+			7d : {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %
+		</p>
+
+		<h2 class="mt-1 fs-h2">A propos :</h2>
+		<p>
+			What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
+			typesetting industry. Lorem Ipsum has been the industry's standard dummy
+			text ever since the 1500s, when an unknown printer took a galley of type
+			and scrambled it to make a type specimen book. It has survived not only
+			five centuries, but also the leap into electronic typesetting, remaining
+			essentially unchanged. It was popularised in the 1960s with the release of
+			Letraset sheets containing Lorem Ipsum passages, and more recently with
+			desktop publishing software like Aldus PageMaker including versions of
+			Lorem Ipsum.
+		</p>
 	</div>
 
 	<!-- <table class="table table-bordered table-dark">
@@ -105,9 +133,22 @@ body {
 	background-color: rgb(50, 50, 50) !important;
 }
 
-p {
+.green {
 	color: rgb(9, 255, 173);
-	font-size: calc(40px + (50 - 40) * ((100vw - 300px) / (1600 - 300)));
+	font-size: calc(25px + (40 - 25) * ((100vw - 300px) / (1600 - 300)));
 	font-family: 'Montserrat', sans-serif;
+}
+
+.fs-h2 {
+	font-family: 'haetten', sans-serif;
+	font-size: calc(45px + (75 - 45) * ((100vw - 300px) / (1600 - 300)));
+}
+
+h2 {
+  	color: white;
+}
+
+p {
+  
 }
 </style>
