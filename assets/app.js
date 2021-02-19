@@ -48,6 +48,7 @@ new Vue({
         return h(Crypt, {
             props: {
                 currency: this.$el.getAttribute('currency'),
+                currencySymbol : this.$el.getAttribute('currencySymbol'),
                 symbol: this.$el.getAttribute('symbol'),
             },
         })

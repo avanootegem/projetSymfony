@@ -9,7 +9,7 @@ class CallApiService
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
-        $this->key = "6ab675c5-fc5e-4796-8bb7-4fca13f262fa";
+        $this->key = "111f3536-380c-4e85-8d58-2bf67b21b2e7";
     }
 
     public function get100CryptoData($currency)
