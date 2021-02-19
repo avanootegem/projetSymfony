@@ -30,15 +30,7 @@
 
 		<h2 class="mt-1 fs-h2">A propos :</h2>
 		<p>
-			What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
-			typesetting industry. Lorem Ipsum has been the industry's standard dummy
-			text ever since the 1500s, when an unknown printer took a galley of type
-			and scrambled it to make a type specimen book. It has survived not only
-			five centuries, but also the leap into electronic typesetting, remaining
-			essentially unchanged. It was popularised in the 1960s with the release of
-			Letraset sheets containing Lorem Ipsum passages, and more recently with
-			desktop publishing software like Aldus PageMaker including versions of
-			Lorem Ipsum.
+			{{description.description}}
 		</p>
 	</div>
 
@@ -103,7 +95,7 @@ export default {
 	props: ['currency', 'symbol'],
 	data() {
 		return {
-			message: 'un message',
+			description: '',
 			cryptos: '',
 			crypto: '',
 		};
@@ -115,16 +107,31 @@ export default {
 				.then((res) => {
 					console.log(res.data);
 					this.cryptos = res.data;
-					var monObjet = this.cryptos;
-					var monTableau = Object.keys(monObjet).map(function(cle) {
+					let monObjet = this.cryptos;
+					let monTableau = Object.keys(monObjet).map(function(cle) {
 						return [String(cle), monObjet[cle]];
 					});
 					this.crypto = monTableau[0][1];
 				});
 		},
+		fetchCryptoDescription() {
+			fetch('/description/' + this.symbol + '_json')
+				.then((res) => res.json())
+				.then((res) => {
+					console.log(res.data);
+					this.description = res.data;
+					let monObjet = this.description;
+					let monTableau = Object.keys(monObjet).map(function(cle) {
+						return [String(cle), monObjet[cle]];
+					});
+          this.description= monTableau[0][1];
+          console.log(this.description)
+				});
+		},
 	},
 	created() {
 		this.fetchCryptoName();
+		this.fetchCryptoDescription();
 	},
 };
 </script>

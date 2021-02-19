@@ -48,4 +48,12 @@ class PageController extends AbstractController
     ]
   ));
   }
+    /**
+   * @Route("/description/{symbol}_json", name="description")
+   */
+  public function description(CallApiService $api, $symbol='BTC'): Response
+  {
+    $value=$api->getDescription($symbol);
+    return new Response($value);
+  }
 }

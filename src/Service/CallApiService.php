@@ -30,4 +30,14 @@ class CallApiService
 
         return $response->getContent();
     }
+
+    public function getDescription($symbol)
+    {
+        $response = $this->client->request(
+            'GET',
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?symbol='. $symbol .'&CMC_PRO_API_KEY=8b768af1-85b2-49b5-9214-cc71ba81af8f'
+        );
+
+        return $response->getContent();
+    }
 }
