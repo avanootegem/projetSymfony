@@ -23,7 +23,13 @@ class PageController extends AbstractController
    */
   public function home($currency = "EUR"): Response
   {
-    return new Response($this->renderView('pages/home.html.twig', ["currency" => $currency]));
+    return new Response($this->renderView(
+      'pages/home.html.twig',
+      [
+        "currency" => $currency,
+        "currencySymbol" => $this->currencySymbol($currency)
+      ]
+    ));
   }
 
   /**
@@ -39,14 +45,33 @@ class PageController extends AbstractController
   /**
    * @Route("/crypto/{symbol}_{currency}", name="crypto")
    */
-  public function crypto($symbol, $currency='EUR'): Response
+  public function crypto($symbol = "BTC", $currency = "EUR"): Response
   {
-    return new Response($this->renderView('pages/crypto.html.twig',
-    [
-      "currency" => $currency,
-      "symbol" => $symbol
-    ]
-  ));
+    return new Response($this->renderView(
+      'pages/crypto.html.twig',
+      [
+        "currency" => $currency,
+        "symbol" => $symbol
+      ]
+    ));
+  }
+
+  private function currencySymbol($currency): string
+  {
+    switch ($currency) {
+      case 'USD':
+        $currencySymbol = "$";
+        break;
+
+      case 'GBP':
+        $currencySymbol = "£";
+        break;
+
+      default:
+        $currencySymbol = "€";
+        break;
+    }
+    return $currencySymbol;
   }
     /**
    * @Route("/description/{symbol}_json", name="description")

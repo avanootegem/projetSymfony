@@ -22,7 +22,6 @@ Vue.filter('formatFR', function (euro) {
 Vue.filter('formatUS', function (us) {
     return new Intl.NumberFormat('us-US').format(us);
 })
-
 new Vue({
     el: '#titre',
     components:
@@ -37,6 +36,7 @@ new Vue({
         return h(Home, {
             props: {
                 currency: this.$el.getAttribute('currency'),
+                currencySymbol : this.$el.getAttribute('currencySymbol')
             },
         })
     },
