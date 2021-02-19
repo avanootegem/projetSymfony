@@ -103,6 +103,9 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+a{
+  color: yellow !important;
+}
 th {
   font-family: "Montserrat", sans-serif;
 }
@@ -114,7 +117,7 @@ tr{
   transition: 0.3s;
 }
 tr:hover{
-  box-shadow: 0px 0px 10px 10px royalblue;
+  box-shadow: 0px 0px 5px 5px white;
 }
 .positive{
   color: rgb(20, 230, 20) !important;
