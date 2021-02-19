@@ -1,30 +1,30 @@
 <template>
   <div>
     <div class="text-center">
-      <p class="green" v-if="currency == 'EUR'">Nom : {{ crypto.name }}</p>
-      <p class="green" v-if="currency == 'EUR'">Symbol : {{ crypto.symbol }}</p>
-      <p class="green" v-if="currency == 'EUR'">
-        Prix : {{ crypto.quote.EUR.price.toPrecision(5) | formatFR }} €
+      <p class="green">Nom : {{ crypto.name }}</p>
+      <p class="green">Symbol : {{ crypto.symbol }}</p>
+      <p class="green">
+        Prix : {{ quoteValue.price.toPrecision(5) | formatFR }} {{currencySymbol}}
       </p>
-      <p class="green" v-if="currency == 'EUR'">
+      <p class="green">
         Market cap :
-        {{ crypto.quote.EUR.market_cap.toPrecision(12) | formatFR }} €
+        {{ quoteValue.market_cap.toPrecision(12) | formatFR }} {{currencySymbol}}
       </p>
-      <p class="green" v-if="currency == 'EUR'">
+      <p class="green">
         Volume 24h :
-        {{ crypto.quote.EUR.volume_24h.toPrecision(12) | formatFR }} €
+        {{ quoteValue.volume_24h.toPrecision(12) | formatFR }} {{currencySymbol}}
       </p>
-      <p class="green" v-if="currency == 'EUR'">
+      <p class="green" v-bind:class="negativeOrPositive(quoteValue.percent_change_1h)">
         1h :
-        {{ crypto.quote.EUR.percent_change_1h.toPrecision(3) | formatFR }} %
+        {{ quoteValue.percent_change_1h.toPrecision(3) | formatFR }} %
       </p>
-      <p class="green" v-if="currency == 'EUR'">
+      <p class="green" v-bind:class="negativeOrPositive(quoteValue.percent_change_24h)">
         24h :
-        {{ crypto.quote.EUR.percent_change_24h.toPrecision(3) | formatFR }} %
+        {{ quoteValue.percent_change_24h.toPrecision(3) | formatFR }} %
       </p>
-      <p class="green" v-if="currency == 'EUR'">
+      <p class="green" v-bind:class="negativeOrPositive(quoteValue.percent_change_7d)">
         7d :
-        {{ crypto.quote.EUR.percent_change_7d.toPrecision(3) | formatFR }} %
+        {{ quoteValue.percent_change_7d.toPrecision(3) | formatFR }} %
       </p>
     </div>
 
@@ -78,15 +78,21 @@
 <script>
 export default {
   name: "Crypt",
-  props: ["currency", "symbol"],
+  props: ["currency", "currencySymbol", "symbol"],
   data() {
     return {
+      negativeNumber :'negative',
       description: "",
       cryptos: "",
       crypto: "",
     };
   },
   methods: {
+    negativeOrPositive(x){
+      if (x < 0) {
+        return this.negativeNumber
+      }
+    },
     fetchCryptoName() {
       fetch("/crypto/" + this.symbol + "_" + this.currency + "_json")
         .then((res) => res.json())
@@ -98,6 +104,12 @@ export default {
             return [String(cle), monObjet[cle]];
           });
           this.crypto = monTableau[0][1];
+
+          let monObjet2 = this.crypto.quote;
+          let monTableau2 = Object.keys(monObjet2).map(function (cle) {
+            return [String(cle), monObjet2[cle]];
+          });
+          this.quoteValue = monTableau2[0][1];
         });
     },
 
@@ -126,6 +138,9 @@ export default {
     this.fetchCryptoName();
     this.fetchCryptoDescription();
   },
+  mounted() {
+    this.negativeOrPositive();
+  }
 };
 </script>
 
@@ -168,6 +183,6 @@ li {
   list-style: none;
 }
 li.tags {
-  list-style-type: "▶";
+  list-style: circle inside;
 }
 </style>

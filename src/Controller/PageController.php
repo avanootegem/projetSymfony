@@ -51,9 +51,19 @@ class PageController extends AbstractController
       'pages/crypto.html.twig',
       [
         "currency" => $currency,
+        "currencySymbol" => $this->currencySymbol($currency),
         "symbol" => $symbol
       ]
     ));
+  }
+  
+  /**
+   * @Route("/description/{symbol}_json", name="description")
+   */
+  public function description(CallApiService $api, $symbol='BTC'): Response
+  {
+    $value=$api->getDescription($symbol);
+    return new Response($value);
   }
 
   private function currencySymbol($currency): string
@@ -72,14 +82,5 @@ class PageController extends AbstractController
         break;
     }
     return $currencySymbol;
-  }
-    
-  /**
-   * @Route("/description/{symbol}_json", name="description")
-   */
-  public function description(CallApiService $api, $symbol='BTC'): Response
-  {
-    $value=$api->getDescription($symbol);
-    return new Response($value);
   }
 }
