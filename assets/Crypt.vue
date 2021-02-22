@@ -167,6 +167,7 @@ h2 {
   color: white;
 }
 h3 {
+  font-family: "haetten", sans-serif;
   font-size: calc(30px + (50 - 30) * ((100vw - 300px) / (1600 - 300)));
   color: white;
 }
