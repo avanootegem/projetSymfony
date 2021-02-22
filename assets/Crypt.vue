@@ -32,7 +32,7 @@
     <p>
       {{ description.description }}
     </p>
-    <h3>Liens utiles</h3>
+    <h3 class="fs-h3 ">Liens utiles</h3>
     <ul>
       <li>
         <a :href="description.urls.website[0]">{{
@@ -68,7 +68,7 @@
         <a :href="explorer">{{ explorer }}</a>
       </li>
     </ul>
-    <h3>Tags</h3>
+    <h3 class="fs-h3 ">Tags</h3>
     <ul >
       <li class="tags" v-for="tag in tags" :key="tag.id"> {{ tag}} </li>
     </ul>
@@ -166,7 +166,7 @@ body {
 h2 {
   color: white;
 }
-h3 {
+.fs-h3 {
   font-family: "haetten", sans-serif;
   font-size: calc(30px + (50 - 30) * ((100vw - 300px) / (1600 - 300)));
   color: white;
